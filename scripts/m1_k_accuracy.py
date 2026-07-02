@@ -24,7 +24,7 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from m1_common import (  # noqa: E402
+from m1_common import (
     GAMMA_EVENTS_URL,
     POST_FIX_FIRST_WINDOW,
     WINDOW_S,
@@ -36,7 +36,9 @@ from m1_common import (  # noqa: E402
 )
 
 CLOSE_SEARCH_LIMIT_MS = 120_000  # a boundary print later than this ⇒ treat close as missing
-K_RAW_VALID_MS = 5_000  # archive "knows" the true K only if a print exists this close to the boundary
+K_RAW_VALID_MS = (
+    5_000  # archive "knows" the true K only if a print exists this close to the boundary
+)
 
 
 def load_prints(workdir: Path) -> list[tuple[int, float]]:
@@ -63,7 +65,9 @@ def load_prints(workdir: Path) -> list[tuple[int, float]]:
     return sorted((ts, v) for ts, (_, v, _) in best.items())
 
 
-def first_print_at_or_after(prints: list[tuple[int, float]], ts_ms: int) -> tuple[int, float] | None:
+def first_print_at_or_after(
+    prints: list[tuple[int, float]], ts_ms: int
+) -> tuple[int, float] | None:
     import bisect
 
     i = bisect.bisect_left(prints, (ts_ms, float("-inf")))
@@ -81,7 +85,7 @@ def fetch_gamma(slug: str) -> dict | None:
             with urllib.request.urlopen(req, timeout=15) as resp:
                 events = json.load(resp)
             break
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             if attempt == 2:
                 print(f"gamma fetch failed for {slug}: {e}", file=sys.stderr)
                 return None
@@ -137,15 +141,11 @@ def analyze(workdir: Path, offline: bool = False) -> tuple[dict, str]:
     extra_startup = sorted(set(kcaps) - set(expected))
 
     lags_all = sorted(k["lag_ms"] for k in kcaps.values())
-    lags_post = sorted(
-        k["lag_ms"] for w, k in kcaps.items() if w >= POST_FIX_FIRST_WINDOW
-    )
+    lags_post = sorted(k["lag_ms"] for w, k in kcaps.items() if w >= POST_FIX_FIRST_WINDOW)
     # Receive-time lag: when the bot actually KNEW K, relative to the boundary
     # (oracle_ts lag above measures only the oracle-side stamp).
     recv_lags_post = sorted(
-        k["recv_wall_ns"] / 1e6 - w * 1000
-        for w, k in kcaps.items()
-        if w >= POST_FIX_FIRST_WINDOW
+        k["recv_wall_ns"] / 1e6 - w * 1000 for w, k in kcaps.items() if w >= POST_FIX_FIRST_WINDOW
     )
 
     # Gamma resolutions (cached).
@@ -222,13 +222,9 @@ def analyze(workdir: Path, offline: bool = False) -> tuple[dict, str]:
 
     n_compared = agree + disagree
     agreement_pct = 100.0 * agree / n_compared if n_compared else float("nan")
-    raw_agree = sum(
-        1 for r in rows if r["implied_raw"] and r["implied_raw"] == r["gamma_winner"]
-    )
+    raw_agree = sum(1 for r in rows if r["implied_raw"] and r["implied_raw"] == r["gamma_winner"])
     raw_compared = sum(1 for r in rows if r["implied_raw"] and r["gamma_winner"])
-    post_rows = [
-        r for r in rows if not r["prefix_window"] and r["status"] in ("agree", "DISAGREE")
-    ]
+    post_rows = [r for r in rows if not r["prefix_window"] and r["status"] in ("agree", "DISAGREE")]
     post_agree = sum(1 for r in post_rows if r["status"] == "agree")
 
     summary = {
@@ -264,9 +260,7 @@ def analyze(workdir: Path, offline: bool = False) -> tuple[dict, str]:
         "unresolved_on_gamma": unresolved,
         "missing_close_in_raw": no_close,
         "agreement_pct": agreement_pct,
-        "k_raw_mismatches": [
-            r for r in rows if r["k_raw_valid"] and not r["k_raw_matches"]
-        ],
+        "k_raw_mismatches": [r for r in rows if r["k_raw_valid"] and not r["k_raw_matches"]],
         "k_raw_unknowable": [r for r in rows if not r["k_raw_valid"]],
         "rows": rows,
     }
@@ -316,7 +310,9 @@ def analyze(workdir: Path, offline: bool = False) -> tuple[dict, str]:
             "the true boundary print reconstructed from the raw archive (live capture was late "
             "or wrong; reconnect backfill recovered the real print):\n"
         )
-        L.append("| window (UTC) | K table (lag ms) | K archive (print at boundary +ms) | Δ | pre-fix? |")
+        L.append(
+            "| window (UTC) | K table (lag ms) | K archive (print at boundary +ms) | Δ | pre-fix? |"
+        )
         L.append("|---|---|---|---|---|")
         for r in mism:
             L.append(
@@ -367,7 +363,13 @@ def analyze(workdir: Path, offline: bool = False) -> tuple[dict, str]:
             )
     excl = [r for r in rows if r["status"] == "excluded"]
     if excl:
-        L.append("\nExcluded windows: " + ", ".join(f"{r['utc']} ({'no close print in archive yet' if r['implied'] is None else 'no Gamma resolution yet'})" for r in excl))
+        L.append(
+            "\nExcluded windows: "
+            + ", ".join(
+                f"{r['utc']} ({'no close print in archive yet' if r['implied'] is None else 'no Gamma resolution yet'})"
+                for r in excl
+            )
+        )
 
     return summary, "\n".join(L)
 

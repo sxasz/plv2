@@ -26,7 +26,7 @@ from array import array
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from m1_common import dump_json, pctl  # noqa: E402
+from m1_common import dump_json, pctl
 
 GRID_MS = 100
 RET_STEPS = 10  # 1 s returns on the 100 ms grid

@@ -10,9 +10,10 @@ from __future__ import annotations
 import gzip
 import json
 import sqlite3
-from datetime import datetime, timezone
+from collections.abc import Iterator
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import IO, Any, Iterator
+from typing import IO, Any
 
 RAW_DIR = Path("/opt/plv2/data/raw")
 DB_PATH = Path("/opt/plv2/data/bot.sqlite")
@@ -32,11 +33,11 @@ GAMMA_EVENTS_URL = "https://gamma-api.polymarket.com/events"
 
 
 def iso_utc(ts_s: float) -> str:
-    return datetime.fromtimestamp(ts_s, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S.%f")[:-3] + "Z"
+    return datetime.fromtimestamp(ts_s, tz=UTC).strftime("%Y-%m-%d %H:%M:%S.%f")[:-3] + "Z"
 
 
 def iso_utc_s(ts_s: float) -> str:
-    return datetime.fromtimestamp(ts_s, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+    return datetime.fromtimestamp(ts_s, tz=UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
 
 
 def pctl(sorted_vals: list[float], q: float) -> float:

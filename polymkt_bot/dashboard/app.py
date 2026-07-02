@@ -93,9 +93,7 @@ def create_app(cfg: Config) -> Flask:
                 )
                 return float(r[0]["micros"]) if r else 0.0
 
-            latency.append(
-                (hop, n, nth(min(int(n * 0.5), n - 1)), nth(min(int(n * 0.95), n - 1)))
-            )
+            latency.append((hop, n, nth(min(int(n * 0.5), n - 1)), nth(min(int(n * 0.95), n - 1))))
         incidents = q("SELECT * FROM incidents ORDER BY wall_ns DESC LIMIT 30")
         return render_template_string(
             PAGE,

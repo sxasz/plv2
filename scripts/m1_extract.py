@@ -25,7 +25,7 @@ from pathlib import Path
 import orjson
 
 sys.path.insert(0, str(Path(__file__).parent))
-from m1_common import GAP_THRESHOLDS_S, RAW_DIR, open_raw, parse_prefix, raw_files  # noqa: E402
+from m1_common import GAP_THRESHOLDS_S, RAW_DIR, open_raw, parse_prefix, raw_files
 
 TOP_GAPS = 10
 
@@ -34,7 +34,15 @@ MAX_GAP_LIST = 500
 
 
 class FeedStats:
-    __slots__ = ("count", "first_ns", "last_ns", "gap_heap", "over_threshold", "over_1s", "over_list")
+    __slots__ = (
+        "count",
+        "first_ns",
+        "gap_heap",
+        "last_ns",
+        "over_1s",
+        "over_list",
+        "over_threshold",
+    )
 
     def __init__(self) -> None:
         self.count = 0

@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from m1_common import (  # noqa: E402
+from m1_common import (
     FIX_RESTART_WALL,
     GAP_THRESHOLDS_S,
     db_ro,
@@ -45,7 +45,9 @@ def analyze(workdir: Path) -> tuple[dict, str]:
     lines: list[str] = []
     lines.append("## 1. Feed health\n")
 
-    lines.append("| feed | frames | span (h) | avg fps | gaps > 1s | gaps > threshold | threshold |")
+    lines.append(
+        "| feed | frames | span (h) | avg fps | gaps > 1s | gaps > threshold | threshold |"
+    )
     lines.append("|---|---|---|---|---|---|---|")
     for name in FEED_ORDER:
         st = feeds.get(name)
@@ -97,7 +99,11 @@ def analyze(workdir: Path) -> tuple[dict, str]:
         summary["incidents"].append({"feed": feed, "kind": kind, "count": cnt})
 
     clob_rec = next(
-        (i for i in summary["incidents"] if i["feed"] == "clob_market" and i["kind"] == "reconnect"),
+        (
+            i
+            for i in summary["incidents"]
+            if i["feed"] == "clob_market" and i["kind"] == "reconnect"
+        ),
         None,
     )
     if clob_rec:
@@ -113,10 +119,7 @@ def analyze(workdir: Path) -> tuple[dict, str]:
         for wall_ns, detail in rtds_reconnects:
             lines.append(f"- {iso_utc(wall_ns / 1e9)} — {detail or 'no detail'}")
         if len(rtds_reconnects) >= 2:
-            spacings = [
-                (b[0] - a[0]) / 1e9
-                for a, b in zip(rtds_reconnects, rtds_reconnects[1:])
-            ]
+            spacings = [(b[0] - a[0]) / 1e9 for a, b in zip(rtds_reconnects, rtds_reconnects[1:])]
             if all(abs(s - 7200) < 30 for s in spacings):
                 lines.append(
                     "\nThe spacing (2h00m ± seconds) points to a server-enforced RTDS "

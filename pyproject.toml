@@ -44,6 +44,10 @@ ignore = [
     "RUF003",
 ]
 
+[tool.ruff.lint.per-file-ignores]
+# One-off analysis tooling (M1 report pipeline): keep it runnable, not pristine.
+"scripts/m1_*.py" = ["E501", "B905", "RUF007"]
+
 [tool.mypy]
 python_version = "3.11"
 strict = true

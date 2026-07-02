@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from m1_common import WINDOW_S, dump_json, iso_utc, load_json, pctl  # noqa: E402
+from m1_common import WINDOW_S, dump_json, iso_utc, load_json, pctl
 
 DENSITY_TAIL_S = 30
 
@@ -117,7 +117,9 @@ def analyze(workdir: Path) -> tuple[dict, str]:
         inside = series[lo:hi]
         n_backfill_only = sum(1 for t in inside if t not in live_ts)
         tails = []
-        for b in range((a_ms // 1000 // WINDOW_S) * WINDOW_S, b_ms // 1000 + WINDOW_S + 1, WINDOW_S):
+        for b in range(
+            (a_ms // 1000 // WINDOW_S) * WINDOW_S, b_ms // 1000 + WINDOW_S + 1, WINDOW_S
+        ):
             if a_ms / 1000 < b + 2 and b_ms / 1000 > b - DENSITY_TAIL_S:
                 tails.append(b)
         stalls.append(

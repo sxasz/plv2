@@ -17,11 +17,11 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-import m1_binance_lead  # noqa: E402
-import m1_feed_health  # noqa: E402
-import m1_k_accuracy  # noqa: E402
-import m1_oracle_cadence  # noqa: E402
-from m1_common import POST_FIX_FIRST_WINDOW, dump_json, iso_utc, iso_utc_s  # noqa: E402
+import m1_binance_lead
+import m1_feed_health
+import m1_k_accuracy
+import m1_oracle_cadence
+from m1_common import POST_FIX_FIRST_WINDOW, dump_json, iso_utc, iso_utc_s
 
 
 def verdict(fh: dict, ka: dict, oc: dict, bl: dict) -> tuple[str, list[str], list[str]]:
@@ -69,7 +69,9 @@ def verdict(fh: dict, ka: dict, oc: dict, bl: dict) -> tuple[str, list[str], lis
     else:
         good.append(
             f"K captured at {ka['boundaries_captured']}/{ka['boundaries_expected']} boundaries "
-            "(100%)." if cov == 1 else f"K coverage {cov:.1%}."
+            "(100%)."
+            if cov == 1
+            else f"K coverage {cov:.1%}."
         )
     rlag = ka["recv_lag_ms_post_fix"]
     if rlag["p95"] is not None and rlag["p95"] > 2500:
@@ -97,9 +99,7 @@ def verdict(fh: dict, ka: dict, oc: dict, bl: dict) -> tuple[str, list[str], lis
             f"{td['median']:.0f} prints, min {td['min']}."
         )
     post_sparse = [
-        s
-        for s in oc["sparse_windows_lt10"]
-        if s["boundary_utc"] >= iso_utc(POST_FIX_FIRST_WINDOW)
+        s for s in oc["sparse_windows_lt10"] if s["boundary_utc"] >= iso_utc(POST_FIX_FIRST_WINDOW)
     ]
     if post_sparse:
         investigate.append(
@@ -135,9 +135,7 @@ def verdict(fh: dict, ka: dict, oc: dict, bl: dict) -> tuple[str, list[str], lis
         if feed == "rtds_chainlink":
             continue  # its gaps are the delivery stalls judged above
         if n_over > 5:
-            investigate.append(
-                f"{feed}: {n_over} gaps over {st['threshold_s']:.0f}s threshold."
-            )
+            investigate.append(f"{feed}: {n_over} gaps over {st['threshold_s']:.0f}s threshold.")
         else:
             good.append(
                 f"{feed}: {st['count']:,} frames @ {st['fps']:.0f}/s, "
@@ -203,7 +201,9 @@ def main() -> None:
 
     L: list[str] = []
     L.append("# M1 Data-Quality Report — 5-minute BTC Up/Down recorder")
-    L.append(f"\nGenerated {iso_utc_s(time.time())} · branch `claude/polymarket-btc-latency-bot-tz0a2q`")
+    L.append(
+        f"\nGenerated {iso_utc_s(time.time())} · branch `claude/polymarket-btc-latency-bot-tz0a2q`"
+    )
     L.append(
         f"\n**Recording analyzed: {iso_utc_s(span_start)} → {iso_utc_s(span_end)} "
         f"({span_h:.2f} h).** Note this is **less than the 24 h intended** for M1: the recorder "
