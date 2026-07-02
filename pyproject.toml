@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "polymkt-bot"
+version = "0.1.0"
+description = "Polymarket 5-minute BTC Up/Down latency bot (recorder / shadow / live-micro)"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp>=3.9",
+    "orjson>=3.9",
+    "PyYAML>=6.0",
+    "python-dotenv>=1.0",
+    "flask>=3.0",
+    "uvloop>=0.19; sys_platform != 'win32'",
+]
+
+[project.optional-dependencies]
+live = [
+    "py-clob-client>=0.34",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "mypy>=1.10",
+    "types-PyYAML",
+]
+
+[tool.setuptools.packages.find]
+include = ["polymkt_bot*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "ASYNC", "RUF"]
+ignore = [
+    "RUF012",  # mutable class attrs (used deliberately for FSM tables)
+    "RUF001",  # ambiguous unicode: math notation (σ, τ, Ŝ, ×, −) is deliberate
+    "RUF002",
+    "RUF003",
+]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+exclude = ["build/"]
+
+[[tool.mypy.overrides]]
+module = ["py_clob_client.*", "uvloop.*", "dotenv.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,76 @@
+# polymkt_bot configuration. Secrets live in .env, never here.
+# All fee/tick/min-size values are queried live from the CLOB — never configured here.
+
+run:
+  shadow_mode: true            # false requires ENABLE_LIVE_TRADING interlock in .env
+  data_dir: data
+  ntp_server: pool.ntp.org
+  max_ntp_offset_ms: 250
+  status_file: data/status.json
+
+endpoints:
+  clob_rest: https://clob.polymarket.com
+  clob_ws: wss://ws-subscriptions-clob.polymarket.com
+  gamma_rest: https://gamma-api.polymarket.com
+  rtds_ws: wss://ws-live-data.polymarket.com
+  binance_ws: wss://stream.binance.com:9443/stream?streams=btcusdt@bookTicker/btcusdt@aggTrade
+
+sizing:
+  stake_usdc: 10.0
+  max_stake_per_window: 25.0
+  depth_participation: 0.5
+  absolute_max_price: 0.97
+  kelly_fraction: 0.0          # 0 disables fractional-Kelly, flat stake used
+
+risk:
+  max_open_exposure_usdc: 50.0
+  max_daily_loss_usdc: 30.0
+  max_consecutive_losses: 4
+  cooldown_windows: 6
+  max_cl_age_ms: 3000
+  max_bn_age_ms: 500
+  min_liquidity_multiple: 1.5  # top-of-book size ≥ order size × this
+  warmup_seconds: 30
+
+window:
+  arm_seconds: 20
+  min_seconds: 2
+  prefetch_seconds: 60         # prefetch next window metadata at T-60
+
+model:
+  ewma_halflife_s: 600
+  vol_floor_per_s: 1.0e-6      # relative 1s vol floor
+  lambda_lead: 1.0
+  basis_window_s: 600
+  k_tie: 1.0
+  p_clip: 0.001
+  tie_bonus: 0.005             # structural bonus toward UP inside oracle tick noise
+
+mode_a:                        # late-window sniper
+  enabled: true
+  p_min_snipe: 0.93
+  max_snipe_price: 0.95
+  min_edge_snipe: 0.02
+  slippage_buffer: 0.005
+
+mode_b:                        # mid-window lag scalp (off until shadow-proven)
+  enabled: false
+  impulse_threshold: 0.0007
+  impulse_window_ms: 1500
+  min_edge_scalp: 0.03
+  scalp_timeout_s: 25
+  scalp_stop_edge: -0.02
+  maker_exit_offset: 0.01
+
+mode_c:                        # passive maker (scaffold, M4)
+  enabled: false
+  half_spread: 0.02
+  max_inventory_usdc: 20.0
+
+shadow:
+  rtt_ms_p50: 80.0             # replaced by live-measured RTT distribution when available
+  rtt_ms_p95: 200.0
+
+dashboard:
+  host: 127.0.0.1
+  port: 8080
