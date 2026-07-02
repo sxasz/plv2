@@ -53,8 +53,8 @@ mode_a:                        # late-window sniper
   min_edge_snipe: 0.02
   slippage_buffer: 0.005
 
-mode_b:                        # mid-window lag scalp (off until shadow-proven)
-  enabled: false
+mode_b:                        # mid-window lag scalp (shadow evaluation, M2)
+  enabled: true
   impulse_threshold: 0.0007
   impulse_window_ms: 1500
   min_edge_scalp: 0.03

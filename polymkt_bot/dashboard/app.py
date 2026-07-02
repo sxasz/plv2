@@ -79,22 +79,23 @@ def create_app(cfg: Config) -> Flask:
     def index() -> str:
         windows = q("SELECT * FROM windows ORDER BY window_start DESC LIMIT 50")
         total = q("SELECT COALESCE(SUM(realized_pnl_usdc),0) t FROM windows")
-        latency = [
-            (
-                row["hop"],
-                row["n"],
-                row["p50"],
-                row["p95"],
+        # SQLite can't use the outer COUNT(*) inside a subquery OFFSET, so the
+        # percentile offsets are computed here per hop instead.
+        latency = []
+        for row in q("SELECT hop, COUNT(*) n FROM latency_samples GROUP BY hop"):
+            hop, n = row["hop"], row["n"]
+
+            def nth(offset: int, hop: str = hop) -> float:
+                r = q(
+                    "SELECT micros FROM latency_samples WHERE hop=? "
+                    "ORDER BY micros LIMIT 1 OFFSET ?",
+                    (hop, offset),
+                )
+                return float(r[0]["micros"]) if r else 0.0
+
+            latency.append(
+                (hop, n, nth(min(int(n * 0.5), n - 1)), nth(min(int(n * 0.95), n - 1)))
             )
-            for row in q(
-                """SELECT hop, COUNT(*) n,
-                   (SELECT micros FROM latency_samples l2 WHERE l2.hop=l1.hop
-                    ORDER BY micros LIMIT 1 OFFSET CAST(COUNT(*)*0.5 AS INT)) p50,
-                   (SELECT micros FROM latency_samples l2 WHERE l2.hop=l1.hop
-                    ORDER BY micros LIMIT 1 OFFSET CAST(COUNT(*)*0.95 AS INT)) p95
-                   FROM latency_samples l1 GROUP BY hop"""
-            )
-        ]
         incidents = q("SELECT * FROM incidents ORDER BY wall_ns DESC LIMIT 30")
         return render_template_string(
             PAGE,
