@@ -124,6 +124,16 @@ class WsFeed(abc.ABC):
         if self._ws is not None and not self._ws.closed:
             await self._ws.close()
 
+    async def reconnect(self) -> None:
+        """Force-close the current connection so `run`'s loop reopens it fresh.
+
+        Some subscribe-style feeds only accept a subscription update in-place
+        once per connection and reject further changes; a clean reconnect
+        re-runs `on_connected`, which (re)subscribes everything from scratch.
+        """
+        if self._ws is not None and not self._ws.closed:
+            await self._ws.close()
+
     async def _read_loop(self, ws: aiohttp.ClientWebSocketResponse) -> None:
         async for msg in ws:
             if msg.type == aiohttp.WSMsgType.TEXT:

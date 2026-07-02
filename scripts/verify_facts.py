@@ -102,7 +102,12 @@ async def check_clob_ws(clob_ws: str, token_ids: list[str]) -> dict[str, Any]:
                 msg = await ws.receive(timeout=deadline - time.monotonic())
                 if msg.type != aiohttp.WSMsgType.TEXT:
                     break
-                doc = json.loads(msg.data)
+                if not msg.data:
+                    continue
+                try:
+                    doc = json.loads(msg.data)
+                except json.JSONDecodeError:
+                    continue
                 for ev in doc if isinstance(doc, list) else [doc]:
                     et = ev.get("event_type", "?")
                     out["samples"].setdefault(et, ev)
@@ -144,9 +149,12 @@ async def check_rtds(rtds_ws: str, capture_s: float) -> dict[str, Any]:
                     msg = await ws.receive(timeout=min(5.0, deadline - time.monotonic()))
                 except TimeoutError:
                     continue
-                if msg.type != aiohttp.WSMsgType.TEXT or msg.data == "PONG":
+                if msg.type != aiohttp.WSMsgType.TEXT or msg.data == "PONG" or not msg.data:
                     continue
-                doc = json.loads(msg.data)
+                try:
+                    doc = json.loads(msg.data)
+                except json.JSONDecodeError:
+                    continue
                 if doc.get("topic") == "crypto_prices_chainlink":
                     payload = doc.get("payload", {})
                     items = payload if isinstance(payload, list) else [payload]
@@ -178,7 +186,12 @@ async def check_binance(url: str) -> dict[str, Any]:
                 msg = await ws.receive(timeout=deadline - time.monotonic())
                 if msg.type != aiohttp.WSMsgType.TEXT:
                     break
-                doc = json.loads(msg.data)
+                if not msg.data:
+                    continue
+                try:
+                    doc = json.loads(msg.data)
+                except json.JSONDecodeError:
+                    continue
                 if "stream" in doc:
                     seen.add(doc["stream"])
             out["streams_seen"] = sorted(seen)

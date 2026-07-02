@@ -228,9 +228,13 @@ class Engine:
             fm = FeeModel(meta)
             self._fee_models[meta.up_token] = fm
             self._fee_models[meta.down_token] = fm
-        self.clob.track([meta.up_token, meta.down_token])
-        if not self.replay_mode:
-            await self.clob.resubscribe()
+        new_tokens = self.clob.track([meta.up_token, meta.down_token])
+        if not self.replay_mode and new_tokens:
+            # The CLOB market channel only accepts one in-place subscribe
+            # update per connection; anything past that is rejected
+            # (server replies plain-text "INVALID OPERATION"). Reconnecting
+            # re-subscribes everything fresh via on_connected instead.
+            await self.clob.reconnect()
         k = self.rtds.get_k(ws)
         if k is not None:
             sess.set_k(k.k, k.oracle_ts_ms)

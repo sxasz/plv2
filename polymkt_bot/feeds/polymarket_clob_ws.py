@@ -130,21 +130,18 @@ class ClobMarketFeed(WsFeed):
         self.on_tick_size_change: Callable[[str, float], None] | None = None
 
     # -- subscription management ----------------------------------------------
-    def track(self, token_ids: list[str]) -> None:
+    def track(self, token_ids: list[str]) -> list[str]:
+        """Start tracking the given tokens; returns the ones not already tracked."""
+        added = []
         for tid in token_ids:
-            self.books.setdefault(tid, OrderBook(tid))
+            if tid not in self.books:
+                self.books[tid] = OrderBook(tid)
+                added.append(tid)
+        return added
 
     def untrack(self, token_ids: list[str]) -> None:
         for tid in token_ids:
             self.books.pop(tid, None)
-
-    async def resubscribe(self) -> None:
-        """(Re)send the subscription for the currently tracked tokens."""
-        if self.books and self.health.connected:
-            await self.send_json({"assets_ids": list(self.books), "type": "market"})
-            # Books are dirty until the server's fresh snapshots arrive.
-            for book in self.books.values():
-                book.dirty = True
 
     async def on_connected(self, ws: aiohttp.ClientWebSocketResponse) -> None:
         for book in self.books.values():

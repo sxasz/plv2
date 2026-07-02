@@ -81,15 +81,24 @@ class RtdsChainlinkFeed(WsFeed):
         )
 
     def on_message(self, raw: str, recv_mono_ns: int, recv_wall_ns: int) -> None:
+        if not raw:
+            # Server sends an empty text frame as a connection ack before any
+            # subscription data; not an error, nothing to parse.
+            return
         doc = orjson.loads(raw)
-        if isinstance(doc, dict) and doc.get("topic") == TOPIC:
-            payload = doc.get("payload")
-            # Historical dump on connect may be a list; live updates are dicts.
-            if isinstance(payload, list):
-                for item in payload:
-                    self._handle_print(item, recv_mono_ns, recv_wall_ns)
-            elif isinstance(payload, dict):
-                self._handle_print(payload, recv_mono_ns, recv_wall_ns)
+        if not isinstance(doc, dict) or doc.get("topic") != TOPIC:
+            return
+        payload = doc.get("payload")
+        if not isinstance(payload, dict):
+            return
+        # Historical backfill dump on (re)connect: payload = {"data": [...], "symbol": ...}.
+        # Live updates: payload = {"symbol":..., "timestamp":..., "value":...} directly.
+        data = payload.get("data")
+        if isinstance(data, list):
+            for item in data:
+                self._handle_print(item, recv_mono_ns, recv_wall_ns)
+        elif "value" in payload:
+            self._handle_print(payload, recv_mono_ns, recv_wall_ns)
 
     def _handle_print(self, p: dict[str, Any], recv_mono_ns: int, recv_wall_ns: int) -> None:
         if p.get("symbol") not in (SYMBOL, None):
