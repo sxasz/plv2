@@ -18,6 +18,12 @@ Every external assumption the bot relies on, with source and verification date.
 > package registries (PyPI `py-clob-client` 0.34.6, npm `@polymarket/real-time-data-client`
 > 1.4.0 — both allowlisted) and search-indexed official docs. `scripts/verify_facts.py`
 > performs the full live re-verification and writes `facts_runtime.json`.
+>
+> **Live verification (2026-07-02):** `verify_facts.py` was run from the EU deployment VPS:
+> **`all_ok: true`, 12/12 checks passed** (Gamma slug discovery, CLOB REST time/tick-size/
+> neg-risk/fee-rate, fee-formula sanity, CLOB WS, Binance WS, RTDS Chainlink stream).
+> Three additional behaviors were discovered empirically and are recorded as
+> `VERIFIED-LIVE` entries below (#4.7, #5.7, #5.8); code fixed in commit `3d645c5`.
 
 ---
 
@@ -69,6 +75,7 @@ Every external assumption the bot relies on, with source and verification date.
 | 4.4 | Client must send `PING` every ~10 s; server replies `PONG` | VERIFIED-DOCS | docs WSS overview | 2026-07-01 |
 | 4.5 | User channel requires L2 API creds in subscribe; delivers `order` (lifecycle) and `trade` (fill) events | VERIFIED-DOCS | docs User Channel; RTDS `clob_user` schema in official npm client README | 2026-07-01 |
 | 4.6 | `book` messages carry a `hash` field for integrity/sequencing checks | UNVERIFIED-RUNTIME | Docs mirrors mention hash; exact gap-detection semantics must be captured live in M1 | — |
+| 4.7 | **The market channel accepts only ONE in-place subscription update per connection.** Any further `assets_ids` update on a live connection is rejected with a plain-text (non-JSON) reply `INVALID OPERATION`. Subscribing new tokens (e.g. at window rollover) requires a clean reconnect, which re-subscribes everything fresh | VERIFIED-LIVE | Empirical isolated probes from EU VPS during M1 deployment; fix in commit `3d645c5`; verified across consecutive window rollovers with zero errors | 2026-07-02 |
 
 ## 5. RTDS (real-time data service)
 
@@ -80,6 +87,8 @@ Every external assumption the bot relies on, with source and verification date.
 | 5.4 | Older `crypto_prices` topic (Binance-sourced, `{"symbol":"btcusdt"}` filter) also exists — **not** the resolution series; do not confuse the two | VERIFIED-SOURCE | npm client 1.4.0 README topics table | 2026-07-01 |
 | 5.5 | RTDS also carries `clob_market` (agg_orderbook/price_change/last_trade_price/tick_size_change) and `clob_user` topics — possible backup path for CLOB data | VERIFIED-SOURCE | npm client 1.4.0 README | 2026-07-01 |
 | 5.6 | Whether the RTDS Chainlink series ticks frequently enough near boundaries, and its exact print cadence, is **measured**, not assumed | UNVERIFIED-RUNTIME | M1 data-quality report requirement | — |
+| 5.7 | RTDS sends an **empty text frame** immediately on connect (connection ack, not JSON). Parsers must skip it | VERIFIED-LIVE | Observed on every connection from EU VPS; fix in commit `3d645c5` | 2026-07-02 |
+| 5.8 | RTDS reconnect/backfill dump payload shape is `{"payload": {"data": [ …prints… ], "symbol": …}}` — **not** a bare list. Live updates remain flat dicts (`{"payload": {"symbol","timestamp","value"}}`) | VERIFIED-LIVE | Observed from EU VPS; parser fixed to consume the real shape (backfill can recover a missed K boundary) in commit `3d645c5` | 2026-07-02 |
 
 ## 6. Binance
 
