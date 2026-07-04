@@ -204,12 +204,14 @@ def main() -> None:
     L.append(
         f"\nGenerated {iso_utc_s(time.time())} · branch `claude/polymarket-btc-latency-bot-tz0a2q`"
     )
+    shortfall = (
+        " Note this is **less than the 24 h intended** for M1." if span_h < 24 else ""
+    )
     L.append(
         f"\n**Recording analyzed: {iso_utc_s(span_start)} → {iso_utc_s(span_end)} "
-        f"({span_h:.2f} h).** Note this is **less than the 24 h intended** for M1: the recorder "
-        "first came up at 05:57:48Z and was restarted at 06:40:21Z to deploy the live-API fixes "
-        "(commit `3d645c5`). Everything below therefore splits pre-fix vs post-fix where it "
-        "matters, and the verdict accounts for the short sample."
+        f"({span_h:.2f} h).**{shortfall} The recorder first came up at 05:57:48Z on 2026-07-02 "
+        "and was restarted at 06:40:21Z to deploy the live-API fixes (commit `3d645c5`); "
+        "everything below splits pre-fix vs post-fix where it matters."
     )
     L.append("\n**Raw archive inventory** (`/opt/plv2/data/raw/`):\n")
     L.append("| file | size (MB) | frames | first frame | last frame |")
@@ -220,6 +222,11 @@ def main() -> None:
             f"{iso_utc(f['first_wall_ns'] / 1e9)} | {iso_utc(f['last_wall_ns'] / 1e9)} |"
         )
     L.append("")
+    incidents_file = args.out.parent / "M1_KNOWN_INCIDENTS.md"
+    if incidents_file.exists():
+        L.append("## 0. Known incidents & root causes\n")
+        L.append(incidents_file.read_text().strip())
+        L.append("")
     L.append(fh_md)
     L.append("")
     L.append(ka_md)

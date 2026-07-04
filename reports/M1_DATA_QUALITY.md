@@ -1,8 +1,8 @@
 # M1 Data-Quality Report — 5-minute BTC Up/Down recorder
 
-Generated 2026-07-02 11:03:57 UTC · branch `claude/polymarket-btc-latency-bot-tz0a2q`
+Generated 2026-07-04 19:41:33 UTC · branch `claude/polymarket-btc-latency-bot-tz0a2q`
 
-**Recording analyzed: 2026-07-02 05:57:48 UTC → 2026-07-02 10:59:49 UTC (5.03 h).** Note this is **less than the 24 h intended** for M1: the recorder first came up at 05:57:48Z and was restarted at 06:40:21Z to deploy the live-API fixes (commit `3d645c5`). Everything below therefore splits pre-fix vs post-fix where it matters, and the verdict accounts for the short sample.
+**Recording analyzed: 2026-07-02 05:57:48 UTC → 2026-07-04 19:32:52 UTC (61.58 h).** The recorder first came up at 05:57:48Z on 2026-07-02 and was restarted at 06:40:21Z to deploy the live-API fixes (commit `3d645c5`); everything below splits pre-fix vs post-fix where it matters.
 
 **Raw archive inventory** (`/opt/plv2/data/raw/`):
 
@@ -11,47 +11,128 @@ Generated 2026-07-02 11:03:57 UTC · branch `claude/polymarket-btc-latency-bot-t
 | 1782968400.jsonl.gz | 4 | 56,537 | 2026-07-02 05:57:48.938Z | 2026-07-02 05:59:59.997Z |
 | 1782972000.jsonl.gz | 147 | 1,869,765 | 2026-07-02 06:00:00.000Z | 2026-07-02 06:59:59.998Z |
 | 1782975600.jsonl.gz | 213 | 2,547,935 | 2026-07-02 07:00:00.000Z | 2026-07-02 07:59:59.999Z |
-| 1782979200.jsonl | 1,790 | 2,270,091 | 2026-07-02 08:00:00.002Z | 2026-07-02 08:59:59.998Z |
-| 1782982800.jsonl | 1,774 | 2,404,373 | 2026-07-02 09:00:00.000Z | 2026-07-02 09:59:59.998Z |
-| 1782986400.jsonl | 1,758 | 2,271,434 | 2026-07-02 10:00:00.004Z | 2026-07-02 10:59:49.236Z |
+| 1782979200.jsonl.gz | 187 | 2,270,091 | 2026-07-02 08:00:00.002Z | 2026-07-02 08:59:59.998Z |
+| 1782982800.jsonl.gz | 179 | 2,404,373 | 2026-07-02 09:00:00.000Z | 2026-07-02 09:59:59.998Z |
+| 1782986400.jsonl.gz | 179 | 2,275,461 | 2026-07-02 10:00:00.004Z | 2026-07-02 10:59:59.998Z |
+| 1782990000.jsonl.gz | 218 | 2,680,162 | 2026-07-02 11:00:00.002Z | 2026-07-02 11:59:59.994Z |
+| 1782993600.jsonl.gz | 200 | 2,643,033 | 2026-07-02 12:00:00.001Z | 2026-07-02 12:59:59.996Z |
+| 1782997200.jsonl.gz | 210 | 2,948,453 | 2026-07-02 13:00:00.001Z | 2026-07-02 13:59:59.998Z |
+| 1783000800.jsonl.gz | 229 | 3,299,303 | 2026-07-02 14:00:00.007Z | 2026-07-02 14:59:59.981Z |
+| 1783004400.jsonl.gz | 203 | 2,670,684 | 2026-07-02 15:00:00.001Z | 2026-07-02 15:59:59.998Z |
+| 1783008000.jsonl.gz | 193 | 2,558,398 | 2026-07-02 16:00:00.000Z | 2026-07-02 16:59:59.998Z |
+| 1783011600.jsonl.gz | 190 | 2,367,719 | 2026-07-02 16:59:59.999Z | 2026-07-02 17:59:59.999Z |
+| 1783015200.jsonl.gz | 179 | 2,136,565 | 2026-07-02 18:00:00.001Z | 2026-07-02 18:59:59.998Z |
+| 1783018800.jsonl.gz | 166 | 2,078,398 | 2026-07-02 19:00:00.003Z | 2026-07-02 19:59:59.998Z |
+| 1783022400.jsonl.gz | 158 | 1,890,183 | 2026-07-02 20:00:00.005Z | 2026-07-02 20:59:59.997Z |
+| 1783026000.jsonl.gz | 140 | 1,642,814 | 2026-07-02 21:00:00.001Z | 2026-07-02 21:59:59.997Z |
+| 1783029600.jsonl.gz | 144 | 1,680,689 | 2026-07-02 22:00:00.001Z | 2026-07-02 22:59:59.998Z |
+| 1783033200.jsonl.gz | 147 | 1,785,386 | 2026-07-02 23:00:00.004Z | 2026-07-02 23:59:59.992Z |
+| 1783036800.jsonl.gz | 180 | 2,213,366 | 2026-07-03 00:00:00.004Z | 2026-07-03 00:59:59.997Z |
+| 1783040400.jsonl.gz | 196 | 2,450,500 | 2026-07-03 01:00:00.001Z | 2026-07-03 01:59:59.997Z |
+| 1783044000.jsonl.gz | 176 | 2,122,326 | 2026-07-03 02:00:00.000Z | 2026-07-03 02:59:59.999Z |
+| 1783047600.jsonl.gz | 156 | 1,859,492 | 2026-07-03 03:00:00.002Z | 2026-07-03 03:59:59.997Z |
+| 1783051200.jsonl.gz | 155 | 1,837,143 | 2026-07-03 04:00:00.003Z | 2026-07-03 04:59:59.994Z |
+| 1783054800.jsonl.gz | 186 | 2,219,172 | 2026-07-03 05:00:00.006Z | 2026-07-03 05:59:59.997Z |
+| 1783058400.jsonl.gz | 163 | 1,926,056 | 2026-07-03 05:59:59.999Z | 2026-07-03 06:59:59.999Z |
+| 1783062000.jsonl.gz | 166 | 1,978,827 | 2026-07-03 07:00:00.001Z | 2026-07-03 07:59:59.992Z |
+| 1783065600.jsonl.gz | 173 | 2,095,444 | 2026-07-03 08:00:00.002Z | 2026-07-03 08:59:59.997Z |
+| 1783069200.jsonl.gz | 166 | 2,004,489 | 2026-07-03 09:00:00.008Z | 2026-07-03 09:59:59.994Z |
+| 1783072800.jsonl.gz | 170 | 2,110,309 | 2026-07-03 10:00:00.000Z | 2026-07-03 10:59:59.999Z |
+| 1783076400.jsonl.gz | 172 | 2,076,895 | 2026-07-03 11:00:00.002Z | 2026-07-03 11:59:59.995Z |
+| 1783080000.jsonl.gz | 173 | 2,098,464 | 2026-07-03 12:00:00.002Z | 2026-07-03 12:59:59.999Z |
+| 1783083600.jsonl.gz | 170 | 2,067,287 | 2026-07-03 13:00:00.003Z | 2026-07-03 13:59:59.993Z |
+| 1783087200.jsonl.gz | 169 | 2,163,985 | 2026-07-03 14:00:00.001Z | 2026-07-03 14:59:59.998Z |
+| 1783090800.jsonl.gz | 173 | 2,151,265 | 2026-07-03 15:00:00.000Z | 2026-07-03 15:59:59.999Z |
+| 1783094400.jsonl.gz | 163 | 1,906,350 | 2026-07-03 16:00:00.002Z | 2026-07-03 16:59:59.994Z |
+| 1783098000.jsonl.gz | 164 | 1,911,631 | 2026-07-03 17:00:00.000Z | 2026-07-03 17:59:59.998Z |
+| 1783101600.jsonl.gz | 160 | 1,820,184 | 2026-07-03 18:00:00.002Z | 2026-07-03 18:59:59.997Z |
+| 1783105200.jsonl.gz | 154 | 1,790,817 | 2026-07-03 19:00:00.008Z | 2026-07-03 19:59:59.996Z |
+| 1783108800.jsonl.gz | 182 | 2,267,812 | 2026-07-03 20:00:00.001Z | 2026-07-03 20:59:59.985Z |
+| 1783112400.jsonl.gz | 180 | 2,188,859 | 2026-07-03 21:00:00.003Z | 2026-07-03 21:59:59.995Z |
+| 1783116000.jsonl.gz | 162 | 1,861,531 | 2026-07-03 22:00:00.000Z | 2026-07-03 22:59:59.999Z |
+| 1783119600.jsonl.gz | 143 | 1,621,999 | 2026-07-03 23:00:00.006Z | 2026-07-03 23:59:59.999Z |
+| 1783123200.jsonl.gz | 146 | 1,719,064 | 2026-07-04 00:00:00.000Z | 2026-07-04 00:59:59.999Z |
+| 1783126800.jsonl.gz | 164 | 1,946,909 | 2026-07-04 01:00:00.003Z | 2026-07-04 01:59:59.995Z |
+| 1783130400.jsonl.gz | 139 | 1,594,749 | 2026-07-04 02:00:00.002Z | 2026-07-04 02:59:59.997Z |
+| 1783134000.jsonl.gz | 139 | 1,594,735 | 2026-07-04 03:00:00.002Z | 2026-07-04 03:59:59.996Z |
+| 1783137600.jsonl.gz | 145 | 1,665,673 | 2026-07-04 04:00:00.000Z | 2026-07-04 04:59:59.995Z |
+| 1783141200.jsonl.gz | 139 | 1,559,905 | 2026-07-04 05:00:00.002Z | 2026-07-04 05:59:59.999Z |
+| 1783144800.jsonl.gz | 144 | 1,665,035 | 2026-07-04 06:00:00.008Z | 2026-07-04 06:59:59.998Z |
+| 1783148400.jsonl.gz | 142 | 1,587,863 | 2026-07-04 07:00:00.006Z | 2026-07-04 07:59:59.999Z |
+| 1783152000.jsonl.gz | 127 | 1,458,658 | 2026-07-04 08:00:00.002Z | 2026-07-04 08:59:59.995Z |
+| 1783155600.jsonl.gz | 131 | 1,481,040 | 2026-07-04 09:00:00.000Z | 2026-07-04 09:59:59.997Z |
+| 1783159200.jsonl.gz | 122 | 1,365,663 | 2026-07-04 10:00:00.003Z | 2026-07-04 10:59:59.994Z |
+| 1783162800.jsonl.gz | 116 | 1,297,581 | 2026-07-04 11:00:00.008Z | 2026-07-04 11:59:59.994Z |
+| 1783166400.jsonl.gz | 112 | 1,260,342 | 2026-07-04 12:00:00.000Z | 2026-07-04 12:59:59.986Z |
+| 1783170000.jsonl.gz | 135 | 1,541,965 | 2026-07-04 12:59:59.999Z | 2026-07-04 13:59:59.994Z |
+| 1783173600.jsonl.gz | 140 | 1,603,998 | 2026-07-04 14:00:00.011Z | 2026-07-04 14:59:59.999Z |
+| 1783177200.jsonl.gz | 168 | 2,080,902 | 2026-07-04 15:00:00.002Z | 2026-07-04 15:59:59.995Z |
+| 1783180800.jsonl.gz | 155 | 1,832,924 | 2026-07-04 16:00:00.001Z | 2026-07-04 16:59:59.998Z |
+| 1783184400.jsonl | 1,480 | 1,841,690 | 2026-07-04 17:00:00.002Z | 2026-07-04 17:59:59.998Z |
+| 1783188000.jsonl | 1,488 | 1,799,453 | 2026-07-04 18:00:00.000Z | 2026-07-04 18:59:59.995Z |
+| 1783191600.jsonl | 738 | 889,947 | 2026-07-04 19:00:00.003Z | 2026-07-04 19:32:52.495Z |
+
+## 0. Known incidents & root causes
+
+_Curated root-cause notes; maintained by hand, appended verbatim by `m1_report.py`. Dates UTC._
+
+**INC-1 · 2026-07-03 00:15–02:15 · RTDS silent connection ("Too Many Requests") — 24 boundaries lost.**
+The RTDS server drops each connection after a 2-hour lifetime. At the 00:15:01 drop, the reconnect's
+subscription was answered with a plain `{"message": "Too Many Requests"}` control frame; the feed kept
+the socket open (PING/PONG healthy) and received only TMR frames for the full 2-hour lifetime, until the
+02:15:02 drop re-phased it onto a healthy connection. No oracle prints were received or archived for the
+period, so 24 boundaries have no K, 25 windows could not be settled, and one filled shadow position was
+stranded unsettled (annotated in the M2 report). **Fix required before M3:** treat any non-print control
+message as fatal (backoff + reconnect), add a no-data watchdog (~30 s) independent of PING/PONG, and
+settle stranded sessions from the Gamma resolution as a fallback.
+
+**INC-2 · 2026-07-02 18:15 → 2026-07-03 04:15 · 2h reconnect cycle phase-locked onto window boundaries — 1 flipped outcome.**
+The same 2-hour lifetime, when phased at :15:01, kills the connection milliseconds after a :15:00 window
+boundary. The boundary print is then missed live and recovered only via the reconnect backfill dump, so
+`k_captures` latches the *next* live print (+1 s/+2 s/+4 s observed at 20:15, 22:15, 02:15). At 20:15:00 the
+resulting K error (+$2.24) flipped the implied outcome on a $0.03 close margin — the single post-fix
+bot-view disagreement in §2 (the archive view remains 100%). The phase drifts with every irregular drop,
+so any boundary can be hit. **Fix required before M3:** accept a backfill-recovered earlier boundary print
+as a K correction within a grace period (with an incident log), and/or preemptively cycle the RTDS
+connection mid-window so server-side drops never race a boundary.
 
 ## 1. Feed health
 
 | feed | frames | span (h) | avg fps | gaps > 1s | gaps > threshold | threshold |
 |---|---|---|---|---|---|---|
-| binance | 2,461,739 | 5.03 | 135.9 | 134 | **2** | 2s |
-| rtds_chainlink | 17,577 | 5.03 | 1.0 | 9,674 | **13** | 5s |
-| clob_market | 8,940,819 | 5.03 | 493.4 | 189 | **2** | 10s |
+| binance | 22,977,043 | 61.58 | 103.6 | 3,948 | **130** | 2s |
+| rtds_chainlink | 211,001 | 61.58 | 1.0 | 115,161 | **212** | 5s |
+| clob_market | 99,150,204 | 61.58 | 447.2 | 994 | **2** | 10s |
 
 **binance — 10 largest inter-frame gaps** (receive-time, UTC):
 
 | gap (s) | from | to | note |
 |---|---|---|---|
+| 3.10 | 2026-07-04 18:43:31.135Z | 2026-07-04 18:43:34.235Z |  |
+| 3.09 | 2026-07-04 02:40:23.439Z | 2026-07-04 02:40:26.526Z |  |
+| 3.04 | 2026-07-03 23:15:46.478Z | 2026-07-03 23:15:49.518Z |  |
+| 3.02 | 2026-07-03 17:29:19.510Z | 2026-07-03 17:29:22.526Z |  |
+| 2.95 | 2026-07-04 18:58:33.937Z | 2026-07-04 18:58:36.891Z |  |
+| 2.95 | 2026-07-04 05:09:22.646Z | 2026-07-04 05:09:25.598Z |  |
 | 2.93 | 2026-07-02 06:22:39.394Z | 2026-07-02 06:22:42.327Z |  |
-| 2.17 | 2026-07-02 06:17:26.105Z | 2026-07-02 06:17:28.274Z |  |
-| 1.91 | 2026-07-02 06:23:24.429Z | 2026-07-02 06:23:26.336Z |  |
-| 1.89 | 2026-07-02 08:52:31.883Z | 2026-07-02 08:52:33.774Z |  |
-| 1.88 | 2026-07-02 06:43:40.277Z | 2026-07-02 06:43:42.154Z |  |
-| 1.84 | 2026-07-02 06:45:35.855Z | 2026-07-02 06:45:37.692Z |  |
-| 1.82 | 2026-07-02 08:08:57.537Z | 2026-07-02 08:08:59.359Z |  |
-| 1.79 | 2026-07-02 06:13:34.284Z | 2026-07-02 06:13:36.075Z |  |
-| 1.75 | 2026-07-02 08:55:33.464Z | 2026-07-02 08:55:35.209Z |  |
-| 1.68 | 2026-07-02 08:13:25.003Z | 2026-07-02 08:13:26.679Z |  |
+| 2.84 | 2026-07-04 12:45:52.277Z | 2026-07-04 12:45:55.120Z |  |
+| 2.82 | 2026-07-03 06:50:54.987Z | 2026-07-03 06:50:57.803Z |  |
+| 2.80 | 2026-07-03 18:52:45.256Z | 2026-07-03 18:52:48.059Z |  |
 
 **rtds_chainlink — 10 largest inter-frame gaps** (receive-time, UTC):
 
 | gap (s) | from | to | note |
 |---|---|---|---|
-| 8.87 | 2026-07-02 08:40:44.319Z | 2026-07-02 08:40:53.191Z |  |
-| 8.77 | 2026-07-02 06:34:38.469Z | 2026-07-02 06:34:47.240Z |  |
-| 8.74 | 2026-07-02 08:15:52.268Z | 2026-07-02 08:16:01.004Z |  |
-| 8.62 | 2026-07-02 06:57:58.320Z | 2026-07-02 06:58:06.941Z |  |
-| 8.57 | 2026-07-02 07:05:09.165Z | 2026-07-02 07:05:17.734Z |  |
-| 8.45 | 2026-07-02 06:01:18.386Z | 2026-07-02 06:01:26.833Z |  |
-| 8.35 | 2026-07-02 10:39:11.217Z | 2026-07-02 10:39:19.565Z |  |
-| 8.07 | 2026-07-02 09:23:12.416Z | 2026-07-02 09:23:20.488Z |  |
-| 7.73 | 2026-07-02 06:41:42.659Z | 2026-07-02 06:41:50.385Z |  |
-| 7.48 | 2026-07-02 10:20:22.381Z | 2026-07-02 10:20:29.858Z |  |
+| 3955.88 | 2026-07-03 01:09:07.961Z | 2026-07-03 02:15:03.841Z |  |
+| 485.03 | 2026-07-03 00:44:07.851Z | 2026-07-03 00:52:12.885Z |  |
+| 190.00 | 2026-07-03 00:40:57.851Z | 2026-07-03 00:44:07.851Z |  |
+| 185.02 | 2026-07-03 01:06:02.946Z | 2026-07-03 01:09:07.961Z |  |
+| 185.01 | 2026-07-03 00:30:12.789Z | 2026-07-03 00:33:17.803Z |  |
+| 185.01 | 2026-07-03 00:55:57.904Z | 2026-07-03 00:59:02.919Z |  |
+| 175.01 | 2026-07-03 00:59:52.927Z | 2026-07-03 01:02:47.936Z |  |
+| 155.01 | 2026-07-03 00:16:47.735Z | 2026-07-03 00:19:22.744Z |  |
+| 150.01 | 2026-07-03 00:33:17.803Z | 2026-07-03 00:35:47.815Z |  |
+| 135.01 | 2026-07-03 00:21:17.751Z | 2026-07-03 00:23:32.762Z |  |
 
 **clob_market — 10 largest inter-frame gaps** (receive-time, UTC):
 
@@ -72,35 +153,66 @@ Generated 2026-07-02 11:03:57 UTC · branch `claude/polymarket-btc-latency-bot-t
 
 | feed | kind | count | first | last |
 |---|---|---|---|---|
-| clob_market | reconnect | 60 | 2026-07-02 06:01:38.909Z | 2026-07-02 10:59:00.317Z |
-| rtds_chainlink | reconnect | 2 | 2026-07-02 08:40:22.548Z | 2026-07-02 10:40:23.152Z |
+| binance | reconnect | 1 | 2026-07-04 16:53:02.191Z | 2026-07-04 16:53:02.191Z |
+| clob_market | reconnect | 773 | 2026-07-02 06:01:38.909Z | 2026-07-04 19:39:00.220Z |
+| rtds_chainlink | reconnect | 32 | 2026-07-02 08:40:22.548Z | 2026-07-04 18:03:01.655Z |
 
-The 60 `clob_market` reconnects against 61 completed windows are **by design**: the CLOB market channel accepts only one in-place subscription update per connection (FACTS.md 4.7, verified live), so the feed performs a clean reconnect at every 5-minute window rollover to subscribe the next market's tokens.
+The 773 `clob_market` reconnects against 741 completed windows are **by design**: the CLOB market channel accepts only one in-place subscription update per connection (FACTS.md 4.7, verified live), so the feed performs a clean reconnect at every 5-minute window rollover to subscribe the next market's tokens.
 
 `rtds_chainlink` reconnects:
 
 - 2026-07-02 08:40:22.548Z — connection lost
 - 2026-07-02 10:40:23.152Z — connection lost
+- 2026-07-02 12:08:32.433Z — connection lost
+- 2026-07-02 14:08:33.059Z — connection lost
+- 2026-07-02 16:08:33.772Z — connection lost
+- 2026-07-02 18:14:59.789Z — connection lost
+- 2026-07-02 20:15:00.516Z — connection lost
+- 2026-07-02 22:15:01.167Z — connection lost
+- 2026-07-03 00:15:01.915Z — connection lost
+- 2026-07-03 02:15:02.676Z — connection lost
+- 2026-07-03 04:15:03.627Z — connection lost
+- 2026-07-03 05:48:29.726Z — connection lost
+- 2026-07-03 06:25:45.707Z — connection lost
+- 2026-07-03 08:25:46.456Z — connection lost
+- 2026-07-03 10:25:47.169Z — connection lost
+- 2026-07-03 11:43:05.057Z — connection lost
+- 2026-07-03 13:43:05.689Z — connection lost
+- 2026-07-03 14:50:21.824Z — connection lost
+- 2026-07-03 16:50:22.565Z — connection lost
+- 2026-07-03 18:50:23.233Z — connection lost
+- 2026-07-03 20:50:23.961Z — connection lost
+- 2026-07-03 22:50:24.716Z — connection lost
+- 2026-07-04 00:50:25.431Z — connection lost
+- 2026-07-04 02:50:26.110Z — connection lost
+- 2026-07-04 04:50:26.820Z — connection lost
+- 2026-07-04 06:02:57.240Z — connection lost
+- 2026-07-04 08:02:57.985Z — connection lost
+- 2026-07-04 10:02:58.693Z — connection lost
+- 2026-07-04 12:02:59.500Z — connection lost
+- 2026-07-04 14:03:00.246Z — connection lost
+- 2026-07-04 16:03:01.014Z — connection lost
+- 2026-07-04 18:03:01.655Z — connection lost
 
-The spacing (2h00m ± seconds) points to a server-enforced RTDS connection lifetime rather than network trouble; each reconnect's backfill dump recovered the prints from the gap (FACTS.md 5.8).
-
-Recorder-side integrity: 11,420,135 raw lines scanned, 0 unparseable (torn tail of the in-progress hour file is expected), 9 empty RTDS connection-ack frames (FACTS.md 5.7), no `recorder_drop` incidents.
+Recorder-side integrity: 122,338,248 raw lines scanned, 0 unparseable (torn tail of the in-progress hour file is expected), 39 empty RTDS connection-ack frames (FACTS.md 5.7), no `recorder_drop` incidents.
 
 ## 2. Price-to-beat (K) accuracy — the killer test
 
-**K coverage:** 61/61 5-minute boundaries inside the recording span got a K captured. In addition the partial startup window (2026-07-02 05:55:00.000Z) — already running when the recorder came up — got a late K and is analyzed below but excluded from coverage.
+**K coverage:** 717/741 5-minute boundaries inside the recording span got a K captured. In addition the partial startup window (2026-07-02 05:55:00.000Z) — already running when the recorder came up — got a late K and is analyzed below but excluded from coverage.
+
+**MISSED boundaries:** ['2026-07-03 00:15:00.000Z', '2026-07-03 00:20:00.000Z', '2026-07-03 00:25:00.000Z', '2026-07-03 00:30:00.000Z', '2026-07-03 00:35:00.000Z', '2026-07-03 00:40:00.000Z', '2026-07-03 00:45:00.000Z', '2026-07-03 00:50:00.000Z', '2026-07-03 00:55:00.000Z', '2026-07-03 01:00:00.000Z', '2026-07-03 01:05:00.000Z', '2026-07-03 01:10:00.000Z', '2026-07-03 01:15:00.000Z', '2026-07-03 01:20:00.000Z', '2026-07-03 01:25:00.000Z', '2026-07-03 01:30:00.000Z', '2026-07-03 01:35:00.000Z', '2026-07-03 01:40:00.000Z', '2026-07-03 01:45:00.000Z', '2026-07-03 01:50:00.000Z', '2026-07-03 01:55:00.000Z', '2026-07-03 02:00:00.000Z', '2026-07-03 02:05:00.000Z', '2026-07-03 02:10:00.000Z']
 
 **K capture lag:**
 
 | population | n | median | p95 | max |
 |---|---|---|---|---|
-| oracle stamp − boundary, all windows | 62 | 0 ms | 68150 ms | 205000 ms |
-| oracle stamp − boundary, post-fix | 52 | 0 ms | 0 ms | 1000 ms |
-| received-by-bot − boundary, post-fix | 52 | 1419 ms | 1894 ms | 2667 ms |
+| oracle stamp − boundary, all windows | 718 | 0 ms | 0 ms | 299000 ms |
+| oracle stamp − boundary, post-fix | 708 | 0 ms | 0 ms | 299000 ms |
+| received-by-bot − boundary, post-fix | 708 | 1362 ms | 2108 ms | 300844 ms |
 
 Post-fix = windows from 2026-07-02 06:45:00.000Z on; earlier windows ran the RTDS parser bugs fixed in `3d645c5` (deployed 06:40:21Z) and are quarantined above rather than mixed into the health signal. The received-by-bot row is the operative number: how long after the boundary the strategy actually knows the price to beat.
 
-**K cross-check:** 5 window(s) where the bot's captured K differs from the true boundary print reconstructed from the raw archive (live capture was late or wrong; reconnect backfill recovered the real print):
+**K cross-check:** 9 window(s) where the bot's captured K differs from the true boundary print reconstructed from the raw archive (live capture was late or wrong; reconnect backfill recovered the real print):
 
 | window (UTC) | K table (lag ms) | K archive (print at boundary +ms) | Δ | pre-fix? |
 |---|---|---|---|---|
@@ -109,18 +221,24 @@ Post-fix = windows from 2026-07-02 06:45:00.000Z on; earlier windows ran the RTD
 | 2026-07-02 06:20:00.000Z | 60455.72 (205000) | 60356.46 (+0) | +99.26 | yes |
 | 2026-07-02 06:30:00.000Z | 60421.54 (33000) | 60398.63 (+0) | +22.91 | yes |
 | 2026-07-02 06:40:00.000Z | 60495.86 (22000) | 60498.24 (+0) | -2.38 | yes |
+| 2026-07-02 16:10:00.000Z | 61633.46 (299000) | 61553.88 (+0) | +79.59 | no |
+| 2026-07-02 20:15:00.000Z | 61377.88 (1000) | 61375.64 (+0) | +2.24 | no |
+| 2026-07-02 22:15:00.000Z | 61457.80 (2000) | 61457.84 (+0) | -0.05 | no |
+| 2026-07-03 02:15:00.000Z | 61449.89 (4000) | 61451.31 (+0) | -1.42 | no |
 
 (For 2026-07-02 05:55:00.000Z the archive itself has no print near the boundary — first print 109s after it — recording started mid-window, so no ground-truth K exists for it.)
 
-**Outcome agreement vs Gamma (killer test):** 60 resolved windows compared.
+(For 2026-07-04 19:35:00.000Z the archive itself has no print near the boundary — first print 0s after it — recording started mid-window, so no ground-truth K exists for it.)
+
+**Outcome agreement vs Gamma (killer test):** 714 resolved windows compared.
 
 | view | agree | compared | rate |
 |---|---|---|---|
-| bot's live K (what the engine believed) | 58 | 60 | **96.7%** |
-| post-fix windows only, bot's live K | 50 | 50 | **100.0%** |
-| recorded archive (backfill-recovered K) | 59 | 59 | **100.0%** |
+| bot's live K (what the engine believed) | 711 | 714 | **99.6%** |
+| post-fix windows only, bot's live K | 703 | 704 | **99.9%** |
+| recorded archive (backfill-recovered K) | 713 | 713 | **100.0%** |
 
-(1 window(s) excluded for having no boundary close print in the archive yet, a further 0 for not being resolved on Gamma yet.)
+(3 window(s) excluded for having no boundary close print in the archive yet, a further 0 for not being resolved on Gamma yet.)
 
 **Every disagreement (bot-view):**
 
@@ -128,25 +246,50 @@ Post-fix = windows from 2026-07-02 06:45:00.000Z on; earlier windows ran the RTD
 |---|---|---|---|---|---|---|---|
 | 2026-07-02 06:15:00.000Z | 60366.17 (147000) | 60356.46 | -9.70 | DOWN | UP | UP | yes |
 | 2026-07-02 06:20:00.000Z | 60455.72 (205000) | 60376.92 | -78.80 | DOWN | UP | UP | yes |
+| 2026-07-02 20:15:00.000Z | 61377.88 (1000) | 61377.85 | -0.03 | DOWN | UP | UP | no |
 
-Excluded windows: 2026-07-02 10:55:00.000Z (no close print in archive yet)
+Excluded windows: 2026-07-03 00:10:00.000Z (no close print in archive yet), 2026-07-04 19:30:00.000Z (no close print in archive yet), 2026-07-04 19:35:00.000Z (no close print in archive yet)
 
 ## 3. Oracle cadence (Chainlink via RTDS)
 
-17,620 deduplicated oracle prints (17,559 received live, the rest recovered via reconnect backfill), 2026-07-02 05:56:49.000Z → 2026-07-02 10:59:47.000Z.
+210,893 deduplicated oracle prints (210,739 received live, the rest recovered via reconnect backfill), 2026-07-02 05:56:49.000Z → 2026-07-04 19:32:51.000Z.
 
 | metric | median | p95 | p99 | max |
 |---|---|---|---|---|
-| oracle-series inter-print gap | 1000 ms | 1000 ms | 2000 ms | 9000 ms (2026-07-02 06:34:37.000Z → 2026-07-02 06:34:46.000Z) |
-| as-received inter-frame gap (live) | 1055 ms | 1643 ms | 2339 ms | 8872 ms |
+| oracle-series inter-print gap | 1000 ms | 1000 ms | 2000 ms | 7147000 ms (2026-07-03 00:14:57.000Z → 2026-07-03 02:14:04.000Z) |
+| as-received inter-frame gap (live) | 1027 ms | 1574 ms | 1995 ms | 7204672 ms |
 
-**Last-30s-of-window print density** over 60 boundaries: median **30**, mean 29.0, min 20 prints. This is the regime the late-window sniper operates in.
+**Last-30s-of-window print density** over 739 boundaries: median **30**, mean 28.5, min 0 prints. This is the regime the late-window sniper operates in.
 
-**Boundary-straddle gap** (last print before a boundary → first at/after): median 1000 ms, p95 1000 ms, max 3000 ms — the oracle-side floor on how quickly a window's K can exist at all.
+**Boundary-straddle gap** (last print before a boundary → first at/after): median 1000 ms, p95 2000 ms, max 7147000 ms — the oracle-side floor on how quickly a window's K can exist at all.
 
-No window had fewer than 10 prints in its final 30s — the oracle never went quiet where the strategy needs it most.
+Windows with < 10 prints in the final 30s:
 
-**RTDS delivery stalls (> 5 s without a frame): 13** (~2.6/h). In every stall the oracle kept printing and the buffered prints arrived late on the same connection (0 print(s) needed reconnect-backfill) — these are transport pauses, not data loss. 1 of them touched a window's final 30s (where the sniper would sit out on the `max_cl_age_ms` staleness guard):
+- 2026-07-03 00:20:00.000Z: 0 prints
+- 2026-07-03 00:25:00.000Z: 0 prints
+- 2026-07-03 00:30:00.000Z: 0 prints
+- 2026-07-03 00:35:00.000Z: 0 prints
+- 2026-07-03 00:40:00.000Z: 0 prints
+- 2026-07-03 00:45:00.000Z: 0 prints
+- 2026-07-03 00:50:00.000Z: 0 prints
+- 2026-07-03 00:55:00.000Z: 0 prints
+- 2026-07-03 01:00:00.000Z: 0 prints
+- 2026-07-03 01:05:00.000Z: 0 prints
+- 2026-07-03 01:10:00.000Z: 0 prints
+- 2026-07-03 01:15:00.000Z: 0 prints
+- 2026-07-03 01:20:00.000Z: 0 prints
+- 2026-07-03 01:25:00.000Z: 0 prints
+- 2026-07-03 01:30:00.000Z: 0 prints
+- 2026-07-03 01:35:00.000Z: 0 prints
+- 2026-07-03 01:40:00.000Z: 0 prints
+- 2026-07-03 01:45:00.000Z: 0 prints
+- 2026-07-03 01:50:00.000Z: 0 prints
+- 2026-07-03 01:55:00.000Z: 0 prints
+- 2026-07-03 02:00:00.000Z: 0 prints
+- 2026-07-03 02:05:00.000Z: 0 prints
+- 2026-07-03 02:10:00.000Z: 0 prints
+
+**RTDS delivery stalls (> 5 s without a frame): 212** (~3.4/h). In every stall the oracle kept printing and the buffered prints arrived late on the same connection (59 print(s) needed reconnect-backfill) — these are transport pauses, not data loss. 38 of them touched a window's final 30s (where the sniper would sit out on the `max_cl_age_ms` staleness guard):
 
 | stall (s) | at | prints inside | tail touched |
 |---|---|---|---|
@@ -163,48 +306,246 @@ No window had fewer than 10 prints in its final 30s — the oracle never went qu
 | 8.07 | 2026-07-02 09:23:12.416Z | 2 | — |
 | 7.48 | 2026-07-02 10:20:22.381Z | 2 | — |
 | 8.35 | 2026-07-02 10:39:11.217Z | 2 | — |
+| 8.86 | 2026-07-02 11:17:21.118Z | 2 | — |
+| 7.87 | 2026-07-02 11:47:00.810Z | 2 | — |
+| 7.87 | 2026-07-02 11:59:23.754Z | 2 | 2026-07-02 12:00:00.000Z |
+| 8.09 | 2026-07-02 12:13:32.530Z | 2 | — |
+| 8.29 | 2026-07-02 12:42:17.336Z | 2 | — |
+| 8.24 | 2026-07-02 13:19:01.066Z | 3 | — |
+| 8.87 | 2026-07-02 13:36:58.351Z | 2 | — |
+| 8.71 | 2026-07-02 14:17:22.152Z | 2 | — |
+| 9.39 | 2026-07-02 14:40:13.341Z | 2 | — |
+| 8.29 | 2026-07-02 15:08:29.329Z | 2 | — |
+| 8.41 | 2026-07-02 15:38:14.279Z | 2 | — |
+| 8.28 | 2026-07-02 16:03:55.445Z | 2 | — |
+| 8.62 | 2026-07-02 16:16:55.162Z | 2 | — |
+| 8.73 | 2026-07-02 16:30:53.001Z | 2 | — |
+| 8.75 | 2026-07-02 16:56:03.294Z | 3 | — |
+| 8.33 | 2026-07-02 17:39:22.068Z | 2 | 2026-07-02 17:40:00.000Z |
+| 8.47 | 2026-07-02 18:02:20.364Z | 2 | — |
+| 8.34 | 2026-07-02 18:35:36.428Z | 2 | — |
+| 8.50 | 2026-07-02 19:21:39.153Z | 2 | — |
+| 9.05 | 2026-07-02 19:36:00.484Z | 3 | — |
+| 8.01 | 2026-07-02 20:08:47.515Z | 2 | — |
+| 8.56 | 2026-07-02 20:39:52.370Z | 2 | 2026-07-02 20:40:00.000Z |
+| 8.23 | 2026-07-02 21:06:45.387Z | 2 | — |
+| 7.53 | 2026-07-02 21:24:57.506Z | 3 | 2026-07-02 21:25:00.000Z |
+| 8.76 | 2026-07-02 21:42:10.298Z | 3 | — |
+| 8.48 | 2026-07-02 22:02:33.102Z | 2 | — |
+| 9.37 | 2026-07-02 22:19:09.193Z | 2 | — |
+| 8.97 | 2026-07-02 23:11:16.245Z | 3 | — |
+| 7.22 | 2026-07-02 23:39:23.163Z | 3 | 2026-07-02 23:40:00.000Z |
+| 8.32 | 2026-07-03 00:05:08.271Z | 3 | — |
+| 5.20 | 2026-07-03 00:14:54.569Z | 2 | 2026-07-03 00:15:00.000Z |
+| 9.99 | 2026-07-03 00:15:02.741Z | 0 | — |
+| 10.00 | 2026-07-03 00:15:12.729Z | 0 | — |
+| 10.00 | 2026-07-03 00:15:22.729Z | 0 | — |
+| 45.00 | 2026-07-03 00:15:32.730Z | 0 | — |
+| 10.00 | 2026-07-03 00:16:17.734Z | 0 | — |
+| 10.00 | 2026-07-03 00:16:27.735Z | 0 | — |
+| 10.00 | 2026-07-03 00:16:37.736Z | 0 | — |
+| 155.01 | 2026-07-03 00:16:47.735Z | 0 | — |
+| 15.00 | 2026-07-03 00:19:22.744Z | 0 | 2026-07-03 00:20:00.000Z |
+| 25.00 | 2026-07-03 00:19:37.747Z | 0 | 2026-07-03 00:20:00.000Z |
+| 15.00 | 2026-07-03 00:20:02.749Z | 0 | — |
+| 10.01 | 2026-07-03 00:20:17.747Z | 0 | — |
+| 9.99 | 2026-07-03 00:20:27.755Z | 0 | — |
+| 10.00 | 2026-07-03 00:20:37.749Z | 0 | — |
+| 10.00 | 2026-07-03 00:20:47.751Z | 0 | — |
+| 20.00 | 2026-07-03 00:20:57.751Z | 0 | — |
+| 135.01 | 2026-07-03 00:21:17.751Z | 0 | — |
+| 30.00 | 2026-07-03 00:23:32.762Z | 0 | — |
+| 55.00 | 2026-07-03 00:24:02.765Z | 0 | 2026-07-03 00:25:00.000Z |
+| 100.01 | 2026-07-03 00:24:57.768Z | 0 | 2026-07-03 00:25:00.000Z |
+| 50.00 | 2026-07-03 00:26:37.775Z | 0 | — |
+| 10.00 | 2026-07-03 00:27:27.777Z | 0 | — |
+| 30.00 | 2026-07-03 00:27:37.780Z | 0 | — |
+| 10.00 | 2026-07-03 00:28:07.781Z | 0 | — |
+| 10.00 | 2026-07-03 00:28:17.783Z | 0 | — |
+| 45.00 | 2026-07-03 00:28:27.781Z | 0 | — |
+| 10.00 | 2026-07-03 00:29:12.784Z | 0 | — |
+| 50.00 | 2026-07-03 00:29:22.785Z | 0 | 2026-07-03 00:30:00.000Z |
+| 185.01 | 2026-07-03 00:30:12.789Z | 0 | — |
+| 150.01 | 2026-07-03 00:33:17.803Z | 0 | 2026-07-03 00:35:00.000Z |
+| 15.00 | 2026-07-03 00:35:47.815Z | 0 | — |
+| 20.00 | 2026-07-03 00:36:02.816Z | 0 | — |
+| 100.01 | 2026-07-03 00:36:22.819Z | 0 | — |
+| 30.00 | 2026-07-03 00:38:02.825Z | 0 | — |
+| 65.00 | 2026-07-03 00:38:32.829Z | 0 | 2026-07-03 00:40:00.000Z |
+| 30.00 | 2026-07-03 00:39:37.832Z | 0 | 2026-07-03 00:40:00.000Z |
+| 10.00 | 2026-07-03 00:40:07.834Z | 0 | — |
+| 10.01 | 2026-07-03 00:40:17.835Z | 0 | — |
+| 9.99 | 2026-07-03 00:40:27.847Z | 0 | — |
+| 10.00 | 2026-07-03 00:40:37.836Z | 0 | — |
+| 10.01 | 2026-07-03 00:40:47.838Z | 0 | — |
+| 190.00 | 2026-07-03 00:40:57.851Z | 0 | — |
+| 485.03 | 2026-07-03 00:44:07.851Z | 0 | 2026-07-03 00:45:00.000Z, 2026-07-03 00:50:00.000Z |
+| 80.01 | 2026-07-03 00:52:12.885Z | 0 | — |
+| 9.99 | 2026-07-03 00:53:32.896Z | 0 | — |
+| 5.00 | 2026-07-03 00:53:42.890Z | 0 | — |
+| 15.00 | 2026-07-03 00:53:47.892Z | 0 | — |
+| 10.00 | 2026-07-03 00:54:02.894Z | 0 | — |
+| 20.00 | 2026-07-03 00:54:12.894Z | 0 | 2026-07-03 00:55:00.000Z |
+| 40.00 | 2026-07-03 00:54:32.895Z | 0 | 2026-07-03 00:55:00.000Z |
+| 45.00 | 2026-07-03 00:55:12.900Z | 0 | — |
+| 185.01 | 2026-07-03 00:55:57.904Z | 0 | — |
+| 45.00 | 2026-07-03 00:59:02.919Z | 0 | 2026-07-03 01:00:00.000Z |
+| 5.00 | 2026-07-03 00:59:47.923Z | 0 | 2026-07-03 01:00:00.000Z |
+| 175.01 | 2026-07-03 00:59:52.927Z | 0 | 2026-07-03 01:00:00.000Z |
+| 10.00 | 2026-07-03 01:02:47.936Z | 0 | — |
+| 15.00 | 2026-07-03 01:02:57.936Z | 0 | — |
+| 5.00 | 2026-07-03 01:03:12.935Z | 0 | — |
+| 15.00 | 2026-07-03 01:03:17.936Z | 0 | — |
+| 10.00 | 2026-07-03 01:03:32.937Z | 0 | — |
+| 10.00 | 2026-07-03 01:03:42.940Z | 0 | — |
+| 10.00 | 2026-07-03 01:03:52.936Z | 0 | — |
+| 10.02 | 2026-07-03 01:04:02.938Z | 0 | — |
+| 9.99 | 2026-07-03 01:04:12.953Z | 0 | — |
+| 10.00 | 2026-07-03 01:04:22.939Z | 0 | 2026-07-03 01:05:00.000Z |
+| 10.00 | 2026-07-03 01:04:32.940Z | 0 | 2026-07-03 01:05:00.000Z |
+| 10.00 | 2026-07-03 01:04:42.939Z | 0 | 2026-07-03 01:05:00.000Z |
+| 10.00 | 2026-07-03 01:04:52.941Z | 0 | 2026-07-03 01:05:00.000Z |
+| 10.00 | 2026-07-03 01:05:02.940Z | 0 | — |
+| 10.00 | 2026-07-03 01:05:12.942Z | 0 | — |
+| 10.00 | 2026-07-03 01:05:22.942Z | 0 | — |
+| 10.00 | 2026-07-03 01:05:32.942Z | 0 | — |
+| 10.00 | 2026-07-03 01:05:42.943Z | 0 | — |
+| 10.00 | 2026-07-03 01:05:52.945Z | 0 | — |
+| 185.02 | 2026-07-03 01:06:02.946Z | 0 | — |
+| 3955.88 | 2026-07-03 01:09:07.961Z | 59 | 2026-07-03 01:10:00.000Z, 2026-07-03 01:15:00.000Z, 2026-07-03 01:20:00.000Z, 2026-07-03 01:25:00.000Z, 2026-07-03 01:30:00.000Z, 2026-07-03 01:35:00.000Z, 2026-07-03 01:40:00.000Z, 2026-07-03 01:45:00.000Z, 2026-07-03 01:50:00.000Z, 2026-07-03 01:55:00.000Z, 2026-07-03 02:00:00.000Z, 2026-07-03 02:05:00.000Z, 2026-07-03 02:10:00.000Z, 2026-07-03 02:15:00.000Z |
+| 7.83 | 2026-07-03 02:27:26.695Z | 2 | — |
+| 7.17 | 2026-07-03 03:10:32.552Z | 2 | — |
+| 7.32 | 2026-07-03 03:31:47.684Z | 2 | — |
+| 8.60 | 2026-07-03 04:21:02.259Z | 2 | — |
+| 7.84 | 2026-07-03 04:38:33.830Z | 2 | — |
+| 8.69 | 2026-07-03 05:04:08.325Z | 3 | — |
+| 8.41 | 2026-07-03 05:23:17.204Z | 2 | — |
+| 8.24 | 2026-07-03 05:58:05.197Z | 2 | — |
+| 8.21 | 2026-07-03 06:08:32.917Z | 2 | — |
+| 8.48 | 2026-07-03 06:24:00.392Z | 2 | — |
+| 8.53 | 2026-07-03 06:42:05.130Z | 2 | — |
+| 8.46 | 2026-07-03 06:55:55.278Z | 2 | — |
+| 7.22 | 2026-07-03 07:19:49.426Z | 2 | 2026-07-03 07:20:00.000Z |
+| 8.14 | 2026-07-03 08:03:47.283Z | 2 | — |
+| 8.71 | 2026-07-03 08:33:59.166Z | 2 | — |
+| 8.39 | 2026-07-03 09:22:55.222Z | 2 | — |
+| 8.96 | 2026-07-03 10:10:26.979Z | 2 | — |
+| 7.38 | 2026-07-03 10:37:30.887Z | 3 | — |
+| 9.81 | 2026-07-03 11:14:42.019Z | 2 | 2026-07-03 11:15:00.000Z |
+| 9.16 | 2026-07-03 11:30:12.267Z | 2 | — |
+| 8.59 | 2026-07-03 11:33:10.016Z | 2 | — |
+| 7.41 | 2026-07-03 11:50:22.137Z | 2 | — |
+| 8.71 | 2026-07-03 12:11:37.118Z | 2 | — |
+| 8.32 | 2026-07-03 12:24:50.298Z | 2 | 2026-07-03 12:25:00.000Z |
+| 8.83 | 2026-07-03 13:00:18.265Z | 3 | — |
+| 7.52 | 2026-07-03 13:31:03.491Z | 3 | — |
+| 8.02 | 2026-07-03 13:46:31.691Z | 2 | — |
+| 8.46 | 2026-07-03 14:24:30.458Z | 2 | 2026-07-03 14:25:00.000Z |
+| 8.23 | 2026-07-03 14:39:14.262Z | 2 | — |
+| 8.31 | 2026-07-03 15:15:19.995Z | 2 | — |
+| 7.57 | 2026-07-03 15:37:08.968Z | 2 | — |
+| 8.56 | 2026-07-03 15:56:02.105Z | 2 | — |
+| 9.53 | 2026-07-03 16:41:00.166Z | 2 | — |
+| 7.87 | 2026-07-03 17:18:28.509Z | 2 | — |
+| 7.80 | 2026-07-03 17:53:52.044Z | 2 | — |
+| 6.76 | 2026-07-03 18:19:33.894Z | 2 | 2026-07-03 18:20:00.000Z |
+| 8.71 | 2026-07-03 18:44:24.279Z | 2 | 2026-07-03 18:45:00.000Z |
+| 7.71 | 2026-07-03 19:27:11.501Z | 2 | — |
+| 8.37 | 2026-07-03 19:51:49.976Z | 2 | — |
+| 8.32 | 2026-07-03 20:12:54.113Z | 2 | — |
+| 8.34 | 2026-07-03 20:40:49.104Z | 2 | — |
+| 8.28 | 2026-07-03 21:07:22.052Z | 3 | — |
+| 8.48 | 2026-07-03 21:20:43.098Z | 2 | — |
+| 8.43 | 2026-07-03 21:39:01.262Z | 2 | — |
+| 9.21 | 2026-07-03 22:10:38.343Z | 2 | — |
+| 8.45 | 2026-07-03 22:36:23.379Z | 2 | — |
+| 8.70 | 2026-07-03 22:53:20.214Z | 2 | — |
+| 8.90 | 2026-07-03 23:23:00.513Z | 3 | — |
+| 8.34 | 2026-07-03 23:42:16.530Z | 2 | — |
+| 5.07 | 2026-07-03 23:47:21.345Z | 3 | — |
+| 8.77 | 2026-07-04 00:20:02.166Z | 4 | — |
+| 8.22 | 2026-07-04 00:38:20.415Z | 2 | — |
+| 7.63 | 2026-07-04 00:58:52.521Z | 2 | — |
+| 8.37 | 2026-07-04 01:24:47.352Z | 2 | 2026-07-04 01:25:00.000Z |
+| 8.40 | 2026-07-04 02:06:02.413Z | 2 | — |
+| 9.00 | 2026-07-04 02:33:55.090Z | 2 | — |
+| 8.26 | 2026-07-04 02:47:47.236Z | 2 | — |
+| 8.26 | 2026-07-04 03:25:12.145Z | 3 | — |
+| 8.79 | 2026-07-04 03:37:32.042Z | 2 | — |
+| 8.00 | 2026-07-04 04:20:37.357Z | 2 | — |
+| 8.16 | 2026-07-04 04:34:35.237Z | 2 | 2026-07-04 04:35:00.000Z |
+| 8.30 | 2026-07-04 05:25:30.647Z | 2 | — |
+| 8.40 | 2026-07-04 06:11:36.016Z | 2 | — |
+| 7.33 | 2026-07-04 06:31:10.306Z | 2 | — |
+| 8.68 | 2026-07-04 06:49:39.302Z | 2 | 2026-07-04 06:50:00.000Z |
+| 8.25 | 2026-07-04 07:41:40.377Z | 2 | — |
+| 8.44 | 2026-07-04 07:57:05.229Z | 2 | — |
+| 7.02 | 2026-07-04 08:10:26.506Z | 2 | — |
+| 8.17 | 2026-07-04 08:48:01.423Z | 2 | — |
+| 9.15 | 2026-07-04 09:11:20.376Z | 2 | — |
+| 8.48 | 2026-07-04 09:53:27.158Z | 2 | — |
+| 8.14 | 2026-07-04 10:13:43.375Z | 2 | — |
+| 8.39 | 2026-07-04 11:04:58.591Z | 2 | 2026-07-04 11:05:00.000Z |
+| 8.75 | 2026-07-04 11:31:19.023Z | 2 | — |
+| 8.60 | 2026-07-04 12:08:14.726Z | 2 | — |
+| 8.21 | 2026-07-04 12:22:19.120Z | 2 | — |
+| 8.72 | 2026-07-04 12:37:12.043Z | 2 | — |
+| 8.10 | 2026-07-04 13:06:48.176Z | 2 | — |
+| 8.17 | 2026-07-04 13:41:36.313Z | 2 | — |
+| 8.18 | 2026-07-04 14:10:27.284Z | 2 | — |
+| 8.33 | 2026-07-04 14:30:21.173Z | 2 | — |
+| 8.15 | 2026-07-04 14:45:01.281Z | 2 | 2026-07-04 14:45:00.000Z |
+| 7.38 | 2026-07-04 15:02:09.715Z | 2 | — |
+| 8.18 | 2026-07-04 15:37:22.167Z | 2 | — |
+| 7.39 | 2026-07-04 16:02:19.426Z | 2 | — |
+| 8.42 | 2026-07-04 16:41:22.297Z | 2 | — |
+| 8.00 | 2026-07-04 17:09:52.511Z | 2 | 2026-07-04 17:10:00.000Z |
+| 8.51 | 2026-07-04 17:23:24.994Z | 2 | — |
+| 8.05 | 2026-07-04 17:35:38.865Z | 2 | — |
+| 8.91 | 2026-07-04 18:25:13.108Z | 2 | — |
+| 8.16 | 2026-07-04 18:48:42.599Z | 2 | — |
+| 8.24 | 2026-07-04 19:07:10.122Z | 3 | — |
 
 ## 4. Binance lead over the oracle
 
-1-second log returns on a 100 ms LOCF grid over 181,178 grid points (local receive clocks, stale/reconnect stretches masked).
+1-second log returns on a 100 ms LOCF grid over 2,217,019 grid points (local receive clocks, stale/reconnect stretches masked).
 
-**Maximum cross-correlation: 0.681 at lag 2700 ms** (Binance leading; zero-lag correlation 0.022).
+**Maximum cross-correlation: 0.657 at lag 2700 ms** (Binance leading; zero-lag correlation 0.044).
 
 | lag (ms) | corr |
 |---|---|
-| 0 | 0.022 |
-| 500 | 0.027 |
-| 1000 | 0.056 |
-| 1500 | 0.165 |
-| 2000 | 0.407 |
-| 2500 | 0.646 |
-| 2700 | 0.681 ← max |
-| 3000 | 0.627 |
-| 3500 | 0.389 |
-| 4000 | 0.192 |
-| 4500 | 0.092 |
-| 5000 | 0.035 |
+| 0 | 0.044 |
+| 500 | 0.055 |
+| 1000 | 0.093 |
+| 1500 | 0.210 |
+| 2000 | 0.438 |
+| 2500 | 0.634 |
+| 2700 | 0.657 ← max |
+| 3000 | 0.604 |
+| 3500 | 0.399 |
+| 4000 | 0.212 |
+| 4500 | 0.114 |
+| 5000 | 0.066 |
 
-**Basis (chainlink − binance mid)** at 17,559 live prints: mean **-80.17 USD**, std **7.50**, p5 -89.92, p95 -70.91. The level (~-13 bp) is expected: Binance quotes BTC/**USDT** while the oracle is BTC/**USD**, so the mean basis embeds the USDT/USD rate plus transport asymmetry. The model's `basis_window_s` EWMA carries the level; the std is what matters for edge sizing.
+**Basis (chainlink − binance mid)** at 210,739 live prints: mean **-64.70 USD**, std **10.16**, p5 -80.88, p95 -51.31. The level (~-11 bp) is expected: Binance quotes BTC/**USDT** while the oracle is BTC/**USD**, so the mean basis embeds the USDT/USD rate plus transport asymmetry. The model's `basis_window_s` EWMA carries the level; the std is what matters for edge sizing.
 
 ## 5. Verdict
 
-# **GO**
+# **NO-GO**
 
 **Evidence for:**
 
-- ✅ outcome agreement: post-fix 50/50 = 100%; archive-view 59/59 = 100%; overall bot-view 96.7% (58/60).
-- ✅ K captured at 61/61 boundaries (100%).
-- ✅ post-fix K known to the bot median 1419 ms / p95 1894 ms / max 2667 ms after the boundary.
-- ✅ oracle prints ~1/s (median gap 1000 ms); last-30s density median 30 prints, min 20.
-- ✅ binance: 2,461,739 frames @ 136/s, 2 gap(s) over its 2s threshold.
-- ✅ clob_market: 8,940,819 frames @ 493/s, 2 gap(s) over its 10s threshold.
-- ✅ Binance leads the oracle: max corr 0.681 at 2700 ms (zero-lag 0.02).
+- ✅ post-fix K known to the bot median 1362 ms / p95 2108 ms / max 300844 ms after the boundary.
+- ✅ oracle prints ~1/s (median gap 1000 ms); last-30s density median 30 prints, min 0.
+- ✅ clob_market: 99,150,204 frames @ 447/s, 2 gap(s) over its 10s threshold.
+- ✅ Binance leads the oracle: max corr 0.657 at 2700 ms (zero-lag 0.04).
 
 **Concerns / conditions:**
 
-- ⚠️ 2 disagreement(s) exist but only on pre-fix windows, and the recorded archive implies the correct outcome for them — fully explained by the parser bug fixed in 3d645c5 and closed by 100% post-fix + archive agreement.
-- ⚠️ RTDS pauses >5s ~2.6×/h (max 8.9s); prints arrive late but none are lost. 1 touched a window tail — expect the sniper to sit out occasionally on the staleness guard. Track this rate in shadow.
-- ⚠️ only 60 resolved windows (~5 h) vs the 24 h / ≥100-window target (FACTS.md 1.4) — shadow mode is itself the way to accumulate this; keep the recorder running and re-run this report before M2 calibration sign-off.
+- ⚠️ 1 outcome disagreement(s) on post-fix windows — the resolution pipeline is provably wrong somewhere; do not shadow-trade until root-caused.
+- ⚠️ K captured for only 96.8% of boundaries.
+- ⚠️ 23 post-fix window(s) with <10 prints in the last 30 s.
+- ⚠️ RTDS stalled >5s 212 times (3.4/h), 59 print(s) only recovered by backfill — delivery reliability is marginal.
+- ⚠️ binance: 130 gaps over 2s threshold.
 
 **Reproduce:** `python scripts/m1_extract.py --workdir WD && python scripts/m1_report.py --workdir WD` (read-only against the live recorder; Gamma responses cached in WD).
